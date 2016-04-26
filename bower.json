@@ -1,0 +1,14 @@
+{
+  "name": "VirtualFriend",
+  "version": "1.0.0",
+  "main": "path/to/main.css",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-mocks": "^1.5.5"
+  },
+  "devDependencies": {}
+}
