@@ -15,6 +15,23 @@ app.factory('friendFactory', function () {
 app.controller('chatCtrl', [
   '$scope', 'friendFactory',
   function($scope, Friend) {
-    // TODO write code for controller
+    $scope.friend = new Friend();
+    
+    $scope.messageText = '';
+    $scope.messages = [];
+    
+    $scope.sendMessage = function () {
+      if (!$scope.messageText)
+        return;
+      
+      var message = {
+        from: 'Me',
+        timestamp: Date.now(),
+        text: $scope.messageText
+      };
+      $scope.messages.unshift(message);
+      
+      $scope.messageText = '';
+    };
   }
 ]);
