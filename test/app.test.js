@@ -107,6 +107,31 @@ describe('VirtualFriend', function () {
     expect($scope.messages[0].text).toMatch("don't understand");
   });
   
+  it('talks about sports 1', function () {
+    sendMessage('Username');
+    sendMessage("Let's talk about sports.");
+    sendMessage('I like volleyball, snowboarding and biking.');
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch("world of difference");
+  });
+  
+  it('talks about sports 2', function () {
+    sendMessage('Username');
+    sendMessage("Don't know");
+    sendMessage("sports");
+    sendMessage('My favorites are football, hockey and skiing.');
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch("have something in common");
+  });
+  
+  it('talks about sports 3', function () {
+    sendMessage('Username');
+    sendMessage("Let's talk about sports.");
+    sendMessage('I enjoy volleyball, snowboarding and biking.');
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch("same tastes");
+  });
+  
   function sendMessage(text, skipFlush) {
     $scope.messageText = text;
     $scope.sendMessage();
