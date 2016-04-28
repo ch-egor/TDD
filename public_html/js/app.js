@@ -17,7 +17,7 @@ app.factory('friendFactory', function () {
       if (this._userSaid === null)
         return "Hi! My name's VF. And what's yours?";
       
-      var nameRegexp = /^\s*(?:I'm |My name is )?([\w\s]+)\s*\.?$/.exec(this._userSaid);
+      var nameRegexp = /^\s*(?:I'm |My name is )?([\w\s']+)\s*\.?$/.exec(this._userSaid);
       if (!nameRegexp)
         return "Sorry, didn't catch it. :( Say again, please.";
       
@@ -30,7 +30,7 @@ app.factory('friendFactory', function () {
       if (this._userSaid === null)
         return "So, what would you like to talk about?";
       
-      var topicRegexp = /^\s*(?:Let's talk about )?([\w\s]+)\s*\.?$/.exec(this._userSaid);
+      var topicRegexp = /^\s*(?:Let's talk about )?([\w\s']+)\s*\.?$/.exec(this._userSaid);
       if (!topicRegexp)
         return "By which you mean what exactly?";
       
