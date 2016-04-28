@@ -44,6 +44,10 @@ app.factory('friendFactory', function () {
           this._userSaid = null;
           this._currentBranch = this._talkAboutMe;
           return this.say();
+        case 'sports':
+          this._userSaid = null;
+          this._currentBranch = this._talkAboutSports;
+          return this.say();
         case "Don't know":
           return "We can talk about weather. Or me, for example. We can also talk about sports, you know.";
         default:
@@ -73,6 +77,24 @@ app.factory('friendFactory', function () {
       if (topicRegexp[1].toLowerCase() === 'yes')
         return "You're flattering me. :)";
       return "And here I thought we were friends.";
+    },
+    _talkAboutSports: function () {
+      if (this._userSaid === null)
+        return "Sure, what sports do you like?";
+      
+      var matches = 0;
+      if (/football/.exec(this._userSaid))
+        matches++;
+      if (/hockey/.exec(this._userSaid))
+        matches++;
+      if (/biathlon/.exec(this._userSaid))
+        matches++;
+      
+      if (matches === 0)
+        return "Seems like there's a world of difference between us.";
+      if (matches < 3)
+        return "Oh, we have something in common.";
+      return "We have the same tastes, that's fantastic! :)";
     }
   };
   
