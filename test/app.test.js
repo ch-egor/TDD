@@ -65,6 +65,9 @@ describe('VirtualFriend', function () {
   it('talks about weather 1', function () {
     sendMessage('Username');
     sendMessage('weather');
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch('like it');
+    expect($scope.messages[0].text).toMatch('sunny');
     sendMessage('Yes');
     expect($scope.messages[0].from).toEqual('VF');
     expect($scope.messages[0].text).toMatch('excellent');
