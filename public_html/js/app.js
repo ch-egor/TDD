@@ -67,6 +67,8 @@ app.factory('friendFactory', function () {
         return "I'm an innovative bot, able to discuss a wide range of topics. Isn't that cool?";
       
       var topicRegexp = /^\s*(Yes|No)/i.exec(this._userSaid);
+      if (!topicRegexp)
+        return "I don't understand.";
       
       if (topicRegexp[1].toLowerCase() === 'yes')
         return "You're flattering me. :)";
