@@ -62,6 +62,22 @@ describe('VirtualFriend', function () {
     expect($scope.messages[0].text).toMatch("toads");
   });
   
+  it('talks about weather 1', function () {
+    sendMessage('Username');
+    sendMessage('weather');
+    sendMessage('Yes');
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch('excellent');
+  });
+  
+  it('talks about weather 2', function () {
+    sendMessage('Username');
+    sendMessage('weather');
+    sendMessage("I don't");
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch('shame');
+  });
+  
   function sendMessage(text, skipFlush) {
     $scope.messageText = text;
     $scope.sendMessage();
