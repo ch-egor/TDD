@@ -35,9 +35,28 @@ app.factory('friendFactory', function () {
         return "By which you mean what exactly?";
       
       this._topic = topicRegexp[1].trim();
-      if (this._topic === "Don't know")
-        return "We can talk about weather. Or me, for example. We can also talk about sports, you know.";
-      return "Sorry, don't know anything about " + this._topic + ".";
+      switch (this._topic) {
+        case 'weather':
+          this._userSaid = null;
+          this._currentBranch = this._talkAboutWeather;
+          return this.say();
+        case "Don't know":
+          return "We can talk about weather. Or me, for example. We can also talk about sports, you know.";
+        default:
+          return "Sorry, don't know anything about " + this._topic + ".";
+      }
+    },
+    _talkAboutWeather: function () {
+      if (this._userSaid === null)
+        return "Well, I like it when it's sunny, do you?";
+      
+      var topicRegexp = /^\s*(Yes|No|I don't|I do)/i.exec(this._userSaid);
+      if (!topicRegexp)
+        return "Don't dodge the question, please. It's rude.";
+      
+      if (topicRegexp[1].toLowerCase() === 'yes' || topicRegexp[1].toLowerCase() === 'i do')
+        return "Wow, that's excellent!";
+      return "Oh, that's such a shame. :(";
     }
   };
   
