@@ -99,6 +99,14 @@ describe('VirtualFriend', function () {
     expect($scope.messages[0].text).toMatch('I thought we were friends');
   });
   
+  it('talks about me 3', function () {
+    sendMessage('Username');
+    sendMessage('you');
+    sendMessage('maybe a little bit');
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch("don't understand");
+  });
+  
   function sendMessage(text, skipFlush) {
     $scope.messageText = text;
     $scope.sendMessage();
