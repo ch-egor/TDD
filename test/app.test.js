@@ -127,7 +127,7 @@ describe('VirtualFriend', function () {
   it('talks about sports 3', function () {
     sendMessage('Username');
     sendMessage("Let's talk about sports.");
-    sendMessage('I enjoy volleyball, snowboarding and biking.');
+    sendMessage('I enjoy football, hockey and biathlon.');
     expect($scope.messages[0].from).toEqual('VF');
     expect($scope.messages[0].text).toMatch("same tastes");
   });
