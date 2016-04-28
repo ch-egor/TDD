@@ -50,4 +50,34 @@ describe('VirtualFriend', function () {
     expect($scope.messages[0].from).toEqual('VF');
     expect($scope.messages[0].text).toMatch('Nice to meet you, Hanna!');
   });
+  
+  it('asks for a list of topics 1', function () {
+    $scope.messageText = 'Username';
+    $scope.sendMessage();
+    $timeout.flush();
+    $scope.messageText = "Don't know";
+    $scope.sendMessage();
+    $timeout.flush();
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch('me');
+    expect($scope.messages[0].text).toMatch('weather');
+    expect($scope.messages[0].text).toMatch('sports');
+  });
+  
+  it('asks for a list of topics 2', function () {
+    $scope.messageText = 'Username';
+    $scope.sendMessage();
+    $timeout.flush();
+    $scope.messageText = 'We can talk about "War and peace", maybe.';
+    $scope.sendMessage();
+    $timeout.flush();
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch('By which you mean');
+    $scope.messageText = "Let's talk about toads";
+    $scope.sendMessage();
+    $timeout.flush();
+    expect($scope.messages[0].from).toEqual('VF');
+    expect($scope.messages[0].text).toMatch("don't know");
+    expect($scope.messages[0].text).toMatch("toads");
+  });
 });
