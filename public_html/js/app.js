@@ -16,7 +16,13 @@ app.factory('friendFactory', function () {
     _askName: function () {
       if (this._userSaid === null)
         return "Hi! My name's VF. And what's yours?";
-      return "Nice to meet you, " + this._userSaid + '!';
+      
+      var nameRegexp = /^\s*(?:I'm |My name is )?([\w\s]+)\s*\.?$/.exec(this._userSaid);
+      if (!nameRegexp)
+        return "Sorry, didn't catch it. :( Say again, please.";
+      
+      this._userName = nameRegexp[1].trim();
+      return "Nice to meet you, " + this._userName + '!';
     }
   };
   
