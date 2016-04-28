@@ -22,7 +22,22 @@ app.factory('friendFactory', function () {
         return "Sorry, didn't catch it. :( Say again, please.";
       
       this._userName = nameRegexp[1].trim();
-      return "Nice to meet you, " + this._userName + '!';
+      this._userSaid = null;
+      this._currentBranch = this._askTopic;
+      return "Nice to meet you, " + this._userName + '! ' + this.say();
+    },
+    _askTopic: function () {
+      if (this._userSaid === null)
+        return "So, what would you like to talk about?";
+      
+      var topicRegexp = /^\s*(?:Let's talk about )?([\w\s]+)\s*\.?$/.exec(this._userSaid);
+      if (!topicRegexp)
+        return "By which you mean what exactly?";
+      
+      this._topic = topicRegexp[1].trim();
+      if (this._topic === "Don't know")
+        return "We can talk about weather. Or me, for example. We can also talk about sports, you know.";
+      return "Sorry, don't know anything about " + this._topic + ".";
     }
   };
   
