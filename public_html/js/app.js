@@ -40,6 +40,10 @@ app.factory('friendFactory', function () {
           this._userSaid = null;
           this._currentBranch = this._talkAboutWeather;
           return this.say();
+        case 'you':
+          this._userSaid = null;
+          this._currentBranch = this._talkAboutMe;
+          return this.say();
         case "Don't know":
           return "We can talk about weather. Or me, for example. We can also talk about sports, you know.";
         default:
@@ -57,6 +61,16 @@ app.factory('friendFactory', function () {
       if (topicRegexp[1].toLowerCase() === 'yes' || topicRegexp[1].toLowerCase() === 'i do')
         return "Wow, that's excellent!";
       return "Oh, that's such a shame. :(";
+    },
+    _talkAboutMe: function () {
+      if (this._userSaid === null)
+        return "I'm an innovative bot, able to discuss a wide range of topics. Isn't that cool?";
+      
+      var topicRegexp = /^\s*(Yes|No)/i.exec(this._userSaid);
+      
+      if (topicRegexp[1].toLowerCase() === 'yes')
+        return "You're flattering me. :)";
+      return "And here I thought we were friends.";
     }
   };
   
